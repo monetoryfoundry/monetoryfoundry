@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     template: "%s · Monetary Foundry",
   },
   description: company.description,
-  metadataBase: new URL("https://monetoryfoundry.com"),
+  metadataBase: new URL("https://monetaryfoundry.com"),
   openGraph: {
     title: company.title,
     description: company.description,

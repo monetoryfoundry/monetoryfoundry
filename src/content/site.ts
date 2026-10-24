@@ -3,8 +3,8 @@ export const company = {
   title: "Monetary Foundry — Protocol engineering for cross-chain RWA lending",
   description:
     "Monetary Foundry is a protocol engineering company. We design and build cross-chain lending infrastructure for tokenized real-world assets — risk systems, vaults, and settlement — as distinct projects for the institutions that run them.",
-  email: "support@monetoryfoundry.com",
-  linkedin: "https://www.linkedin.com/company/monetoryfoundry/",
+  email: "support@monetaryfoundry.com",
+  linkedin: "https://www.linkedin.com/company/monetaryfoundry/",
   year: 2026,
 } as const;
 

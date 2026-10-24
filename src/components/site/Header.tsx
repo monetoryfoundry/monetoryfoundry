@@ -1,76 +1,51 @@
 "use client";
 
-import Link from "next/link";
 import { useState } from "react";
-import { Menu, X } from "lucide-react";
-import { navigation } from "@/content/site";
-import { Wordmark } from "./Wordmark";
+import { company, navigation } from "@/content/site";
 
 export function Header() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border/80 bg-white/90 backdrop-blur-md">
-      <div className="container-page flex h-[4.25rem] items-center justify-between">
-        <Wordmark />
-        <nav className="hidden items-center gap-9 md:flex" aria-label="Primary">
-          {navigation.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="text-sm font-medium text-muted-strong transition-colors duration-200 hover:text-foreground"
-            >
-              {item.label}
-            </Link>
-          ))}
-          <Link
-            href="/contact"
-            className="rounded-md bg-accent px-3.5 py-2 text-sm font-semibold text-ink transition-colors duration-200 hover:bg-accent-hover"
-          >
-            Contact us
-          </Link>
-        </nav>
+    <header className="nav">
+      <div className="nav-inner">
+        <a
+          href="#top"
+          className="logo"
+          onClick={() => setOpen(false)}
+        >
+          <img src="/favicon.svg" alt="" width={28} height={28} />
+          <span>Monetary</span> Foundry
+        </a>
         <button
           type="button"
-          className="rounded-md border border-border bg-surface p-2 md:hidden"
+          className="nav-toggle"
           aria-expanded={open}
-          aria-controls="mobile-nav"
+          aria-controls="primary-nav"
           aria-label={open ? "Close menu" : "Open menu"}
-          onClick={() => setOpen((v) => !v)}
+          onClick={() => setOpen((value) => !value)}
         >
-          {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          <span />
         </button>
-      </div>
-      {open ? (
         <nav
-          id="mobile-nav"
-          className="border-t border-border bg-white md:hidden"
-          aria-label="Mobile"
+          id="primary-nav"
+          className={open ? "nav-links is-open" : "nav-links"}
+          aria-label="Primary"
         >
-          <ul className="container-page py-2">
-            {navigation.map((item) => (
-              <li key={item.href}>
-                <Link
-                  href={item.href}
-                  className="block border-b border-border/70 py-3.5 text-sm font-medium text-muted-strong"
-                  onClick={() => setOpen(false)}
-                >
-                  {item.label}
-                </Link>
-              </li>
-            ))}
-            <li className="py-3">
-              <Link
-                href="/contact"
-                className="inline-flex rounded-md bg-accent px-3.5 py-2 text-sm font-semibold text-ink"
-                onClick={() => setOpen(false)}
-              >
-                Contact us
-              </Link>
-            </li>
-          </ul>
+          {navigation.map((item) => (
+            <a key={item.href} href={item.href} onClick={() => setOpen(false)}>
+              {item.label}
+            </a>
+          ))}
+          <a
+            className="nav-cta"
+            href={`mailto:${company.email}`}
+            onClick={() => setOpen(false)}
+          >
+            Get in Touch
+          </a>
         </nav>
-      ) : null}
+      </div>
     </header>
   );
 }

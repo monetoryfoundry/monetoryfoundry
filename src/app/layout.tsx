@@ -1,50 +1,57 @@
 import type { Metadata } from "next";
+import { DM_Sans, Instrument_Serif } from "next/font/google";
 import { Footer } from "@/components/site/Footer";
 import { Header } from "@/components/site/Header";
-import { metadataContent } from "@/content/site";
+import { company } from "@/content/site";
 import "./globals.css";
+
+const dmSans = DM_Sans({
+  subsets: ["latin"],
+  variable: "--font-dm-sans",
+  display: "swap",
+});
+
+const instrumentSerif = Instrument_Serif({
+  subsets: ["latin"],
+  weight: "400",
+  style: ["normal", "italic"],
+  variable: "--font-instrument",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: {
-    default: metadataContent.title,
+    default: company.title,
     template: "%s · Monetary Foundry",
   },
-  description: metadataContent.description,
+  description: company.description,
   metadataBase: new URL("https://monetoryfoundry.com"),
   openGraph: {
-    title: metadataContent.title,
-    description: metadataContent.description,
-    siteName: "Monetary Foundry",
+    title: company.title,
+    description: company.description,
+    siteName: company.name,
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: metadataContent.title,
-    description: metadataContent.description,
+    title: company.title,
+    description: company.description,
   },
-  icons: { icon: "/favicon.png", apple: "/logo.png" },
+  icons: { icon: "/favicon.svg", apple: "/favicon.svg" },
 };
 
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className="h-full antialiased">
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap"
-          rel="stylesheet"
-        />
-      </head>
-      <body className="flex min-h-full flex-col bg-background font-sans text-foreground">
+    <html
+      lang="en"
+      className={`${dmSans.variable} ${instrumentSerif.variable}`}
+      suppressHydrationWarning
+    >
+      <body suppressHydrationWarning>
         <Header />
-        <main className="flex-1">{children}</main>
+        <main>{children}</main>
         <Footer />
       </body>
     </html>
